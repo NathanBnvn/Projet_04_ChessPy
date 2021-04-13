@@ -1,15 +1,33 @@
 #! /usr/bin/env python3
 # coding: utf-8
 
-from model.tournament import Tournaments
+import inquirer
+from model.tournament import *
+from model.player import PlayerModel
 
-def create_tournament():
-	tournament = Tournaments()
-	tournament.name =
-	tournament.place =
-	tournament.turns = 4
-	tournament.tours =
-	tournament.players =
-	tournament.timeCheck =
-	tournament.description =
-	pass
+
+def create():
+	name = input("Entrez le nom du tournois : ")
+	place = input("Entrez le lieu où se déroule le tournois : ")
+	date = input("Entrez la date : ")
+	TURNS = 4
+	tours = "#"
+	players = PlayerModel
+	timeControl = [
+		inquirer.List("timeControl", message="contrôle du temps", choices=["bullet", "blitz", "coup rapide"],),
+		]
+	answers = inquirer.prompt(timeControl)
+	timeControl = answers["timeControl"]
+	description = input("Les remarques du directeur : ")
+
+	tournament = TournamentModel(name=name, place=place, date=date, turns=TURNS, tours=tours, players=players, timeControl=timeControl, description=description,)
+	return tournament
+
+
+class TournamentController:
+
+	def __init__(self):
+		self.model = TournamentModel()
+		self.playerModel = PlayerModel()
+
+	create()
